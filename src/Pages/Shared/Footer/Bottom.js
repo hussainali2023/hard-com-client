@@ -17,7 +17,7 @@ const Bottom = () => {
               <img src={instagram} alt="" className=" h-8 w-8" />
             </Link>
             <Link to={"/"}>
-              <img src={facebook} alt="" className=" h-10 w-10" />
+              <img src={facebook} alt="" className=" h-10 w-12" />
             </Link>
           </p>
         </div>
