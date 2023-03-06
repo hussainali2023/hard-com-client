@@ -1,29 +1,22 @@
 // import { render } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import image1 from "../../../assests/monitor.jpg";
-import image2 from "../../../assests/monitor.jpg";
-import image3 from "../../../assests/monitor.jpg";
-import image4 from "../../../assests/monitor.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const Keyboard = () => {
-  const [keyboards, setKeyboards] = useState();
+const Monitor = () => {
+  const [monitors, setMonitors] = useState();
   useEffect(() => {
-    fetch("https://hard-com-server-hussainali2023.vercel.app/category/keyboard")
+    fetch("https://hard-com-server-hussainali2023.vercel.app/category/monitor")
       .then((res) => res.json())
-      .then((data) => setKeyboards(data));
+      .then((data) => setMonitors(data));
   }, []);
 
-  console.log(keyboards);
+  console.log(monitors);
 
   const card = {
     dots: true,
     infinite: true,
-    autoplay: true,
-    pauseOnHover: true,
-    arrow: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 2,
@@ -35,7 +28,7 @@ const Keyboard = () => {
           slidesToShow: 3,
           slidesToScroll: 2,
           infinite: true,
-          dots: false,
+          dots: true,
         },
       },
       {
@@ -57,18 +50,20 @@ const Keyboard = () => {
   };
   return (
     <div className=" mt-10 mx-10">
-      <h2 className=" text-3xl"> Keyboards </h2>
+      <h2 className=" text-3xl mb-6"> Monitors </h2>
       <Slider {...card}>
-        {keyboards?.map((keyboard) => (
-          <div key={keyboard._id} className="  py-4 px-6">
+        {monitors?.map((monitor) => (
+          <div key={monitor._id} className=" py-4 px-6 pb-10">
             <div data-aos="zoom-in" data-aos-duration="1000">
-              <img src={keyboard.photo} className=" w-72" />
+              <img src={monitor.photo} className=" w-72" />
             </div>
             <div>
-              <p>{keyboard?.name}</p>
+              <p className=" text-lg">{monitor?.name}</p>
               <div className=" flex text-center">
-                <p className=" text-2xl mr-4">{keyboard?.newPrice}</p>
-                <p className=" text-xl line-through">{keyboard?.oldPrice}</p>
+                <p className="text-2xl text-center mr-6">{monitor?.newPrice}</p>
+                <p className="text-xl text-center line-through">
+                  {monitor?.oldPrice}
+                </p>
               </div>
             </div>
           </div>
@@ -77,4 +72,4 @@ const Keyboard = () => {
     </div>
   );
 };
-export default Keyboard;
+export default Monitor;
