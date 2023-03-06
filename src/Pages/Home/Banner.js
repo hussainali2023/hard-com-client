@@ -20,16 +20,6 @@ const Banner = () => {
             height: "100px",
             parallax: true,
           },
-          {
-            breakPoint: 600,
-            height: "400px",
-            parallax: true,
-          },
-          {
-            breakPoint: 1000,
-            height: "500px",
-            parallax: true,
-          },
         ]}
       />
     </div>
