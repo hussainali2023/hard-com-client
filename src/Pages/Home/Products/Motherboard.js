@@ -5,11 +5,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import "./zoom.css";
 
 const Motherboard = () => {
   const [motherboards, setMotherboards] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/category/motherboard")
+    fetch("https://hard-com-server.vercel.app/category/motherboard")
       .then((res) => res.json())
       .then((data) => setMotherboards(data));
   }, []);
@@ -59,7 +60,7 @@ const Motherboard = () => {
       <h2 className=" text-3xl mb-6"> Motherboard </h2>
       <Slider {...card}>
         {motherboards?.map((motherboard) => (
-          <div key={motherboard._id} className=" py-4 px-6 pb-10">
+          <div key={motherboard._id} className="zoom py-4 px-6 pb-10">
             <div data-aos="zoom-in" data-aos-duration="1000">
               <div data-aos="zoom-in" data-aos-duration="1000">
                 <img src={motherboard.photo} className=" w-72" />

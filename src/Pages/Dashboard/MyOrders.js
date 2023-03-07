@@ -39,23 +39,23 @@ const MyOrders = () => {
           <tbody>
             {bookings &&
               bookings?.map((booking, i) => (
-                <tr key={booking._id}>
+                <tr key={booking?._id}>
                   <th>{i + 1}</th>
                   <td>
                     <img
-                      src={booking.phonePhoto}
+                      src={booking?.phonePhoto}
                       className=" h-12 md:h-20"
                       alt=""
                     />
                   </td>
-                  <td>{booking.phoneName}</td>
-                  <td>{booking.sellPrice}</td>
-                  <td>{booking.bookingDate}</td>
+                  <td>{booking?.phoneName}</td>
+                  <td>{booking?.sellPrice}</td>
+                  <td>{booking?.bookingDate}</td>
                   <td>
-                    {booking.sellPrice && !booking.paid && (
+                    {booking?.sellPrice && !booking?.paid && (
                       <button className="btn btn-primary btn-sm">Pay</button>
                     )}
-                    {booking.price && booking.paid && (
+                    {booking?.price && booking?.paid && (
                       <span className="text-green-500">Paid</span>
                     )}
                   </td>

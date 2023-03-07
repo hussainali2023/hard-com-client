@@ -7,7 +7,7 @@ import payments from "../../../assests/footer-icons-2.webp";
 const Bottom = () => {
   return (
     <div className=" mt-6 grid grid-cols-1 md:grid-cols-2 py-2 bg-black text-white ">
-      <div className=" pl-16 grid grid-cols-1 md:grid-cols-2 items-center">
+      <div className=" pl-2 md:pl-16 grid grid-cols-1 md:grid-cols-2 items-center">
         <div className=" flex ">
           <p>Copyright © 2023 HardCom | All rights reserved.</p>
         </div>

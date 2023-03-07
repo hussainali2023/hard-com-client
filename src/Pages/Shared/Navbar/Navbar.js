@@ -3,10 +3,14 @@ import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Logo from "../../../assests/Screenshot 2023-03-04 114954.jpg";
+import useAdmin from "../../../hooks/useAdmin";
+import useSeller from "../../../hooks/useSeller";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
   const navigate = useNavigate();
   const handleLogOut = () => {
     logOut()
@@ -21,23 +25,50 @@ const Navbar = () => {
 
   const listItems = (
     <React.Fragment>
-      <li>
+      <li className="zoom">
         <Link to="/">Home</Link>
       </li>
-      <li>
+      <li className="zoom">
         <Link to="/blog">Blog</Link>
       </li>
       {user?.uid && (
         <>
-          {" "}
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
+          <li className="zoom">
+            <Link to="/my-orders">My Orders</Link>
           </li>
         </>
       )}
+      {isSeller && (
+        <>
+          <li className="zoom">
+            <Link to="/add-product">Add Product</Link>
+          </li>
+          <li className="zoom">
+            <Link to="/my-product">My Product</Link>
+          </li>
+        </>
+      )}
+      {isAdmin && (
+        <>
+          <li className="zoom">
+            <Link to="/all-seller">All Sellers</Link>
+          </li>
+          <li className="zoom">
+            <Link to="/all-buyer">All Buyers</Link>
+          </li>
+        </>
+      )}
+      {/* {user?.uid && (
+        <>
+          {" "}
+          <li className="zoom">
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+        </>
+      )} */}
       {user?.uid ? (
         <>
-          <li>
+          <li className="zoom">
             <button
               onClick={handleLogOut}
               className="inline-flex items-center justify-center w-full h-12 px-6 tracking-wide text-white transition duration-200 rounded shadow-md bg-yellow-400 hover:bg-yellow-500"
@@ -48,7 +79,7 @@ const Navbar = () => {
         </>
       ) : (
         <>
-          <li>
+          <li className="zoom">
             <Link
               to="/login"
               className="inline-flex items-center justify-center w-full h-12 px-6 tracking-wide text-white transition duration-200 rounded shadow-md bg-yellow-400 hover:bg-yellow-500"

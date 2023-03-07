@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import Blogs from "../Pages/Blogs/Blogs";
+// import AddProduct from "../Pages/AddProduct";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import AllBuyer from "../Pages/Dashboard/AllBuyer";
 import AllSeller from "../Pages/Dashboard/AllSeller";
@@ -39,30 +40,24 @@ const router = createBrowserRouter([
         element: <Blogs></Blogs>,
       },
       {
-        path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
-        children: [
-          {
-            path: "/dashboard/my-orders",
-            element: <MyOrders></MyOrders>,
-          },
-          {
-            path: "/dashboard/my-product",
-            element: <MyProduct></MyProduct>,
-          },
-          {
-            path: "/dashboard/add-product",
-            element: <AddProduct></AddProduct>,
-          },
-          {
-            path: "/dashboard/all-buyer",
-            element: <AllBuyer></AllBuyer>,
-          },
-          {
-            path: "/dashboard/all-seller",
-            element: <AllSeller></AllSeller>,
-          },
-        ],
+        path: "/my-orders",
+        element: <MyOrders></MyOrders>,
+      },
+      {
+        path: "/my-product",
+        element: <MyProduct></MyProduct>,
+      },
+      {
+        path: "/add-product",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/all-buyer",
+        element: <AllBuyer></AllBuyer>,
+      },
+      {
+        path: "/all-seller",
+        element: <AllSeller></AllSeller>,
       },
     ],
   },

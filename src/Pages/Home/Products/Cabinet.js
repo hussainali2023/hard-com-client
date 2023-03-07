@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./zoom.css";
 
 const Cabinet = () => {
   const [cabinets, setCabinets] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/category/cabinet")
+    fetch("https://hard-com-server.vercel.app/category/cabinet")
       .then((res) => res.json())
       .then((data) => setCabinets(data));
   }, []);
@@ -53,7 +54,7 @@ const Cabinet = () => {
       <h2 className=" text-3xl"> cabinets </h2>
       <Slider {...card}>
         {cabinets?.map((cabinet) => (
-          <div key={cabinet._id} className="  py-4 px-6">
+          <div key={cabinet._id} className="zoom  py-4 px-6">
             <div data-aos="zoom-in" data-aos-duration="1000">
               <img src={cabinet.photo} className=" w-72" />
             </div>

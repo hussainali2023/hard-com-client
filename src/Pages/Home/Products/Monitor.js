@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./zoom.css";
 
 const Monitor = () => {
   const [monitors, setMonitors] = useState();
   useEffect(() => {
-    fetch("https://hard-com-server-hussainali2023.vercel.app/category/monitor")
+    fetch("https://hard-com-server.vercel.app/category/monitor")
       .then((res) => res.json())
       .then((data) => setMonitors(data));
   }, []);
@@ -53,7 +54,7 @@ const Monitor = () => {
       <h2 className=" text-3xl mb-6"> Monitors </h2>
       <Slider {...card}>
         {monitors?.map((monitor) => (
-          <div key={monitor._id} className=" py-4 px-6 pb-10">
+          <div key={monitor._id} className="zoom py-4 px-6 pb-10">
             <div data-aos="zoom-in" data-aos-duration="1000">
               <img src={monitor.photo} className=" w-72" />
             </div>

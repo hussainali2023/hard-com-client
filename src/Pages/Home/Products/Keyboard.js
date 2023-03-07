@@ -1,17 +1,15 @@
 // import { render } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import image1 from "../../../assests/monitor.jpg";
-import image2 from "../../../assests/monitor.jpg";
-import image3 from "../../../assests/monitor.jpg";
-import image4 from "../../../assests/monitor.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// import Zoom from "react-img-hover-zoom";
+import "./zoom.css";
 
 const Keyboard = () => {
   const [keyboards, setKeyboards] = useState();
   useEffect(() => {
-    fetch("https://hard-com-server-hussainali2023.vercel.app/category/keyboard")
+    fetch("https://hard-com-server.vercel.app/category/keyboard")
       .then((res) => res.json())
       .then((data) => setKeyboards(data));
   }, []);
@@ -60,7 +58,7 @@ const Keyboard = () => {
       <h2 className=" text-3xl"> Keyboards </h2>
       <Slider {...card}>
         {keyboards?.map((keyboard) => (
-          <div key={keyboard._id} className="  py-4 px-6">
+          <div key={keyboard._id} className="zoom  py-4 px-6">
             <div data-aos="zoom-in" data-aos-duration="1000">
               <img src={keyboard.photo} className=" w-72" />
             </div>
