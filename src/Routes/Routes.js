@@ -10,6 +10,7 @@ import MyOrders from "../Pages/Dashboard/MyOrders";
 import MyProduct from "../Pages/Dashboard/MyProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import CategoryProduct from "../Pages/Home/CategoryProduct/CategoryProduct";
+import DetailsProduc from "../Pages/Home/DetailsProduct/DetailsProduc";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
@@ -47,6 +48,13 @@ const router = createBrowserRouter([
         element: <CategoryProduct></CategoryProduct>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/category/type/${params.id}`),
+      },
+
+      {
+        path: "/product/:id",
+        element: <DetailsProduc></DetailsProduc>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/product/${params.id}`),
       },
       {
         path: "/my-orders",

@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./zoom.css";
+import { Link } from "react-router-dom";
 
 const Cabinet = () => {
   const [cabinets, setCabinets] = useState();
@@ -50,22 +51,24 @@ const Cabinet = () => {
     ],
   };
   return (
-    <div className=" mt-10 mx-10">
+    <div className=" mt-10 px-10">
       <h2 className=" text-3xl"> cabinets </h2>
       <Slider {...card}>
         {cabinets?.map((cabinet) => (
-          <div key={cabinet._id} className="zoom  py-4 px-6">
-            <div data-aos="zoom-in" data-aos-duration="1000">
-              <img src={cabinet.photo} className=" w-72" />
-            </div>
-            <div>
-              <p>{cabinet?.name}</p>
-              <div className=" flex text-center">
-                <p className=" text-2xl mr-4">{cabinet?.newPrice}</p>
-                <p className=" text-xl line-through">{cabinet?.oldPrice}</p>
+          <Link to={`/product/${cabinet._id}`}>
+            <div key={cabinet._id} className="zoom  py-4 px-6">
+              <div data-aos="zoom-in" data-aos-duration="1000">
+                <img src={cabinet.photo} className=" w-72" />
+              </div>
+              <div>
+                <p>{cabinet?.name}</p>
+                <div className=" flex text-center">
+                  <p className=" text-2xl mr-4">{cabinet?.newPrice}</p>
+                  <p className=" text-xl line-through">{cabinet?.oldPrice}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </Slider>
     </div>

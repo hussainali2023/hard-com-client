@@ -2,7 +2,7 @@ import React from "react";
 
 const Company = () => {
   return (
-    <div>
+    <div data-aos="fade-left" data-aos-duration="1000">
       <h1 className=" text-xl font-semibold mb-4">COMPANY</h1>
       <p className=" list-none">
         <li className=" mb-2">Contact Us</li>

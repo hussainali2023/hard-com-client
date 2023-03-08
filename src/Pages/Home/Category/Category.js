@@ -21,13 +21,13 @@ const Category = () => {
   }
   return (
     <div className="mx-2 md:mx-8 md:my-16 my-8">
-      <h1 className=" text-3xl font-semibold">Trending Category</h1>
+      <h1 className=" text-xl md:text-3xl font-semibold">Trending Category</h1>
 
-      <div className=" grid grid-cols-5 gap-4 mt-6 mx-20">
+      <div className=" grid grid-cols-2 md:grid-cols-5 gap-4 mt-6 mx-2 md:mx-20">
         {categories?.map((category) => (
           <Link to={`/category/${category.type}`}>
-            <div key={category._id} className=" mb-6">
-              <img src={category.logo} className=" zoom h-40 w-40" alt="" />{" "}
+            <div key={category._id} className="zoom mb-6">
+              <img src={category.logo} className=" h-40 w-40" alt="" />{" "}
               <p className=" ml-10 text-lg"> {category.type}</p>
             </div>
           </Link>

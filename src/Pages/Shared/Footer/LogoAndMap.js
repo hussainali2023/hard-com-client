@@ -3,7 +3,7 @@ import Logo from "../../../assests/Screenshot 2023-03-04 114954.jpg";
 
 const LogoAndMap = () => {
   return (
-    <div>
+    <div data-aos="fade-right" data-aos-duration="1000">
       <div className=" flex justify-center mb-4">
         <img src={Logo} alt="" className=" h-16" />
       </div>

@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import "./zoom.css";
+import { Link } from "react-router-dom";
 
 const Motherboard = () => {
   const [motherboards, setMotherboards] = useState();
@@ -56,28 +57,30 @@ const Motherboard = () => {
   }, []);
 
   return (
-    <div className=" mt-10 mx-10">
+    <div className=" mt-10 px-10">
       <h2 className=" text-3xl mb-6"> Motherboard </h2>
       <Slider {...card}>
         {motherboards?.map((motherboard) => (
-          <div key={motherboard._id} className="zoom py-4 px-6 pb-10">
-            <div data-aos="zoom-in" data-aos-duration="1000">
+          <Link to={`/product/${motherboard._id}`}>
+            <div key={motherboard._id} className="zoom py-4 px-6 pb-10">
               <div data-aos="zoom-in" data-aos-duration="1000">
-                <img src={motherboard.photo} className=" w-72" />
+                <div data-aos="zoom-in" data-aos-duration="1000">
+                  <img src={motherboard.photo} className=" w-72" />
+                </div>
+              </div>
+              <div>
+                <p className=" text-lg">{motherboard?.name}</p>
+                <div className=" flex text-center">
+                  <p className="text-2xl text-center mr-6">
+                    {motherboard?.newPrice}
+                  </p>
+                  <p className="text-xl text-center line-through">
+                    {motherboard?.oldPrice}
+                  </p>
+                </div>
               </div>
             </div>
-            <div>
-              <p className=" text-lg">{motherboard?.name}</p>
-              <div className=" flex text-center">
-                <p className="text-2xl text-center mr-6">
-                  {motherboard?.newPrice}
-                </p>
-                <p className="text-xl text-center line-through">
-                  {motherboard?.oldPrice}
-                </p>
-              </div>
-            </div>
-          </div>
+          </Link>
         ))}
       </Slider>
     </div>

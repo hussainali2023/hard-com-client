@@ -2,7 +2,7 @@ import React from "react";
 
 const MyAccount = () => {
   return (
-    <div>
+    <div data-aos="fade-down" data-aos-duration="1000">
       <h1 className=" text-xl font-semibold mb-4">MY ACCOUNT</h1>
       <p className=" list-none">
         <li className=" mb-2">Track Your Order</li>

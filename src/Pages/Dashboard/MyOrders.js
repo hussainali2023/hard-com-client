@@ -6,21 +6,21 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  // const url = `https://purana-phone-server.vercel.app/bookings?email=${user?.email}`;
+  const url = `http://localhost:5000/bookings?email=${user?.email}`;
 
-  // const { data: bookings = [] } = useQuery({
-  //   queryKey: ["bookings", user?.email],
-  //   queryFn: async () => {
-  //     const res = await fetch(url, {
-  //       headers: {
-  //         authorization: `bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     });
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // });
-
+  const { data: bookings = [] } = useQuery({
+    queryKey: ["bookings", user?.email],
+    queryFn: async () => {
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
+  console.log(bookings);
   return (
     <div className=" mt-6 ml-2">
       <h3 className=" text-xl md:text-3xl mb-5">My Orders</h3>
@@ -36,24 +36,26 @@ const MyOrders = () => {
               <th>Payment</th>
             </tr>
           </thead>
-          {/* <tbody>
+          <tbody>
             {bookings &&
               bookings?.map((booking, i) => (
                 <tr key={booking?._id}>
                   <th>{i + 1}</th>
                   <td>
                     <img
-                      src={booking?.phonePhoto}
+                      src={booking?.productPhoto}
                       className=" h-12 md:h-20"
                       alt=""
                     />
                   </td>
-                  <td>{booking?.phoneName}</td>
-                  <td>{booking?.sellPrice}</td>
+                  <td>{booking?.name}</td>
+                  <td>{booking?.newPrice}</td>
                   <td>{booking?.bookingDate}</td>
                   <td>
-                    {booking?.sellPrice && !booking?.paid && (
-                      <button className="btn btn-primary btn-sm">Pay</button>
+                    {booking?.newPrice && !booking?.paid && (
+                      <button className="btn bg-orange-400 px-3 py-2 text-white rounded-xl btn-primary btn-sm">
+                        Pay
+                      </button>
                     )}
                     {booking?.price && booking?.paid && (
                       <span className="text-green-500">Paid</span>
@@ -61,7 +63,7 @@ const MyOrders = () => {
                   </td>
                 </tr>
               ))}
-          </tbody> */}
+          </tbody>
         </table>
       </div>
     </div>
