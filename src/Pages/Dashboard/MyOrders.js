@@ -6,20 +6,20 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `https://purana-phone-server.vercel.app/bookings?email=${user?.email}`;
+  // const url = `https://purana-phone-server.vercel.app/bookings?email=${user?.email}`;
 
-  const { data: bookings = [] } = useQuery({
-    queryKey: ["bookings", user?.email],
-    queryFn: async () => {
-      const res = await fetch(url, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
-      const data = await res.json();
-      return data;
-    },
-  });
+  // const { data: bookings = [] } = useQuery({
+  //   queryKey: ["bookings", user?.email],
+  //   queryFn: async () => {
+  //     const res = await fetch(url, {
+  //       headers: {
+  //         authorization: `bearer ${localStorage.getItem("accessToken")}`,
+  //       },
+  //     });
+  //     const data = await res.json();
+  //     return data;
+  //   },
+  // });
 
   return (
     <div className=" mt-6 ml-2">
@@ -36,7 +36,7 @@ const MyOrders = () => {
               <th>Payment</th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             {bookings &&
               bookings?.map((booking, i) => (
                 <tr key={booking?._id}>
@@ -61,7 +61,7 @@ const MyOrders = () => {
                   </td>
                 </tr>
               ))}
-          </tbody>
+          </tbody> */}
         </table>
       </div>
     </div>

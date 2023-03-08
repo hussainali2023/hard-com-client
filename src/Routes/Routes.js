@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import DashboardLayout from "../Layout/DashboardLayout";
+// import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import Blogs from "../Pages/Blogs/Blogs";
 // import AddProduct from "../Pages/AddProduct";
@@ -9,9 +9,12 @@ import AllSeller from "../Pages/Dashboard/AllSeller";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import MyProduct from "../Pages/Dashboard/MyProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import CategoryProduct from "../Pages/Home/CategoryProduct/CategoryProduct";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import AdminRoute from "./AdminRoute";
+import SellerRoute from "./SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -40,24 +43,46 @@ const router = createBrowserRouter([
         element: <Blogs></Blogs>,
       },
       {
+        path: "/category/:id",
+        element: <CategoryProduct></CategoryProduct>,
+        loader: ({ params }) =>
+          fetch(`http:localhost:5000/category/type/${params.id}`),
+      },
+      {
         path: "/my-orders",
         element: <MyOrders></MyOrders>,
       },
       {
         path: "/my-product",
-        element: <MyProduct></MyProduct>,
+        element: (
+          <SellerRoute>
+            <MyProduct></MyProduct>
+          </SellerRoute>
+        ),
       },
       {
         path: "/add-product",
-        element: <AddProduct></AddProduct>,
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>
+          </SellerRoute>
+        ),
       },
       {
         path: "/all-buyer",
-        element: <AllBuyer></AllBuyer>,
+        element: (
+          <AdminRoute>
+            <AllBuyer></AllBuyer>
+          </AdminRoute>
+        ),
       },
       {
         path: "/all-seller",
-        element: <AllSeller></AllSeller>,
+        element: (
+          <AdminRoute>
+            <AllSeller></AllSeller>
+          </AdminRoute>
+        ),
       },
     ],
   },

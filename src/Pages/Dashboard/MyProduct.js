@@ -15,7 +15,7 @@ const MyProduct = () => {
     queryKey: ["products", user.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://purana-phone-server.vercel.app/products?email=${user.email}`
+        `http://localhost:5000/all-products?email=${user.email}`
       );
       const data = await res.json();
       return data;
@@ -24,10 +24,10 @@ const MyProduct = () => {
 
   const handleDelete = (product) => {
     const agree = window.confirm(
-      `Are you want to sure to Delete ${product.phoneName}`
+      `Are you want to sure to Delete ${product.name}`
     );
     if (agree) {
-      fetch(`https://purana-phone-server.vercel.app/products/${product._id}`, {
+      fetch(`http://localhost:5000/all-products/${product._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -60,13 +60,14 @@ const MyProduct = () => {
           <tbody>
             {products &&
               products?.map((product, i) => (
-                <tr key={product._id}>
+                <tr className="" key={product._id}>
                   <th>{i + 1}</th>
                   <td>
                     <img src={product.photo} className="h-20" alt="" />
                   </td>
-                  <td>{product.phoneName}</td>
-                  <td>{product.salePrice}</td>
+
+                  <td>{product.name.slice(0, 15) + "...."}</td>
+                  <td>{product.newPrice}</td>
                   <td></td>
                   <td>
                     <button>Advertise</button>

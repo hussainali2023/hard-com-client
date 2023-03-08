@@ -11,15 +11,13 @@ const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const date = new Date().toJSON().slice(0, 10);
   const {
-    data: companies,
+    data: categories,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["bookings"],
+    queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://purana-phone-server.vercel.app/category/companyName"
-      );
+      const res = await fetch("http://localhost:5000/category");
       const data = await res.json();
       return data;
     },
@@ -31,7 +29,7 @@ const AddProduct = () => {
     handleSubmit,
   } = useForm();
 
-  const imgbbKey = process.env.REACT_APP_imgbb_key;
+  // const imgbbKey = process.env.REACT_APP_imgbb_key;
   const navigate = useNavigate();
 
   const handleAddPhone = (data) => {
@@ -39,10 +37,13 @@ const AddProduct = () => {
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
-    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-      method: "POST",
-      body: formData,
-    })
+    fetch(
+      `https://api.imgbb.com/1/upload?key=17d74797a64a4ed97d0982c31d95c223`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
@@ -52,17 +53,17 @@ const AddProduct = () => {
             sellerName: user.displayName,
             email: user.email,
             post_date: date,
-            conditionType: data.conditionType,
-            companyName: data.companyName,
-            phoneName: data.phoneName,
+            condition: data.condition,
+            type: data.type,
+            name: data.name,
             photo: imgData.data.url,
-            originalPrice: data.originalPrice,
-            salePrice: data.salePrice,
+            oldPrice: data.oldPrice,
+            newPrice: data.newPrice,
             location: data.location,
             usage: data.usage,
           };
           // console.log(phone);
-          fetch("https://purana-phone-server.vercel.app/products", {
+          fetch("http://localhost:5000/all-products", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -71,9 +72,9 @@ const AddProduct = () => {
           })
             .then((res) => res.json())
             .then((result) => {
-              toast.success("New Phone Added Successfully");
+              toast.success("New Product Added Successfully");
               refetch();
-              navigate("/dashboard/my-product");
+              navigate("/my-product");
             });
         }
       });
@@ -87,7 +88,7 @@ const AddProduct = () => {
       <AddCategory></AddCategory>
 
       <div className=" col-span-8 ml-2 md:ml-16  ">
-        <h1 className=" text-2xl font-bold text-blue-600">Add A New Phone</h1>
+        <h1 className=" text-2xl font-bold text-blue-600">Add A New Product</h1>
         <p className=" text-red-600">{error}</p>
         <form onSubmit={handleSubmit(handleAddPhone)} action="">
           <div className=" grid grid-cols-2 gap-4 md:gap-6 mt-6">
@@ -96,16 +97,13 @@ const AddProduct = () => {
                 htmlFor="exampleInputEmail2"
                 className="form-label inline-block mb-2 text-gray-700"
               >
-                Select Brand Name
+                Select Product Category
               </label>
               <br />
-              <select
-                {...register("companyName")}
-                className="w-full py-2 border-2 "
-              >
-                {companies.map((company, i) => (
-                  <option value={company.companyName} key={i}>
-                    {company.companyName}
+              <select {...register("type")} className="w-full py-2 border-2 ">
+                {categories?.map((category, i) => (
+                  <option value={category.type} key={i}>
+                    {category.type}
                   </option>
                 ))}
               </select>
@@ -115,10 +113,10 @@ const AddProduct = () => {
                 htmlFor="exampleInputEmail2"
                 className="form-label inline-block mb-2 text-gray-700"
               >
-                Phone Name
+                Product Name
               </label>
               <input
-                {...register("phoneName")}
+                {...register("name")}
                 type="text"
                 className="form-control
         block
@@ -136,13 +134,13 @@ const AddProduct = () => {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleInputEmail2"
-                placeholder="Enter Phone Name"
+                placeholder="Enter Product Name"
               />
             </div>{" "}
           </div>
           <div className=" grid grid-cols-2  gap-6">
             <div>
-              <p className="mb-2">Image of Phone</p>
+              <p className="mb-2">Image of Product</p>
               <label className="block shadow ">
                 <span className="sr-only cursor-pointer">Choose File</span>
                 <input
@@ -160,7 +158,7 @@ const AddProduct = () => {
                 Sale Price
               </label>
               <input
-                {...register("salePrice")}
+                {...register("newPrice")}
                 type="text"
                 className="form-control
         block
@@ -220,7 +218,7 @@ const AddProduct = () => {
                 Original Price
               </label>
               <input
-                {...register("originalPrice")}
+                {...register("oldPrice")}
                 type="text"
                 className="form-control
         block
@@ -281,7 +279,7 @@ const AddProduct = () => {
               </label>
               <br />
               <select
-                {...register("conditionType")}
+                {...register("condition")}
                 className="w-full py-2 border-2 "
               >
                 <option value="excellent">excellent</option>
@@ -291,7 +289,7 @@ const AddProduct = () => {
             </div>{" "}
           </div>
           <input
-            className="btn bg-yellow-400 text-white border-0 mt-4"
+            className="btn px-4 py-2 cursor-pointer hover:bg-yellow-500 rounded-xl bg-yellow-400 text-white border-0 mt-4"
             type="submit"
             value="Submit"
           />

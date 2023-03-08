@@ -35,6 +35,7 @@ const SignUp = () => {
           .then(() => {
             toast.success("Registration Successfull");
             saveUsersInDatabase(data.name, data.email, data.role);
+            navigate("/");
           })
           .catch((err) => {
             console.log(err);

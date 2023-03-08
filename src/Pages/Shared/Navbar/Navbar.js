@@ -38,7 +38,7 @@ const Navbar = () => {
           </li>
         </>
       )}
-      {isSeller && (
+      {user?.uid && isSeller && (
         <>
           <li className="zoom">
             <Link to="/add-product">Add Product</Link>

@@ -1,6 +1,7 @@
 import React from "react";
 import About from "./About/About";
 import Banner from "./Banner";
+import Category from "./Category/Category";
 import Cabinet from "./Products/Cabinet";
 import Keyboard from "./Products/Keyboard";
 import Monitor from "./Products/Monitor";
@@ -12,6 +13,7 @@ const Home = () => {
     <div>
       <Banner />
       <Shipping />
+      <Category />
       <Keyboard />
       <Monitor />
       <Motherboard />

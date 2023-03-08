@@ -9,15 +9,13 @@ const AddCategory = () => {
   const navigate = useNavigate();
 
   const {
-    data: companies,
+    data: categories,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["bookings"],
+    queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://purana-phone-server.vercel.app/category/companyName"
-      );
+      const res = await fetch("http://localhost:5000/category");
       const data = await res.json();
       return data;
     },
@@ -34,21 +32,24 @@ const AddCategory = () => {
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
-    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-      method: "POST",
-      body: formData,
-    })
+    fetch(
+      `https://api.imgbb.com/1/upload?key=17d74797a64a4ed97d0982c31d95c223`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
           // console.log(imgData);
 
           const category = {
-            companyName: data.companyName,
-            companyLogo: imgData.data.url,
+            type: data.type,
+            logo: imgData.data.url,
           };
           // console.log(category);
-          fetch("https://purana-phone-server.vercel.app/category", {
+          fetch("http://localhost:5000/category", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -68,20 +69,20 @@ const AddCategory = () => {
   return (
     <div className=" ml-4 col-span-4 mb-16 ">
       <h1 className=" mb-6 text-2xl font-bold text-blue-600">
-        Add Phone Category
+        Add Product Category
       </h1>
       <div className="form-group mb-6">
         <label
           htmlFor="exampleInputEmail2"
           className="form-label inline-block mb-2 text-gray-700"
         >
-          Existing Brand
+          Existing Category
         </label>
         <br />
         <select className="w-full py-2 ">
-          {companies.map((company, i) => (
-            <option value={company.companyName} key={i}>
-              {company.companyName}
+          {categories?.map((category, i) => (
+            <option value={category.type} key={i}>
+              {category.type}
             </option>
           ))}
         </select>
@@ -92,10 +93,10 @@ const AddCategory = () => {
             htmlFor="exampleInputEmail2"
             className="form-label inline-block mb-2 text-gray-700"
           >
-            Phone Brand
+            Category Product (eg. Monitor, Cabinet)
           </label>
           <input
-            {...register("companyName")}
+            {...register("type")}
             type="text"
             className="form-control lowercase
         block
@@ -113,10 +114,10 @@ const AddCategory = () => {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleInputEmail2"
-            placeholder="Enter A New Brand"
+            placeholder="Enter A New Category"
           />
         </div>
-        <p className="mb-2">Brand Logo</p>
+        <p className="mb-2">Category Logo</p>
         <label className="block shadow ">
           <span className="sr-only cursor-pointer">Choose File</span>
           <input
@@ -126,7 +127,7 @@ const AddCategory = () => {
           />
         </label>
         <input
-          className="btn bg-yellow-400 text-white border-0 mt-6"
+          className="btn hover:bg-yellow-500 bg-yellow-400 px-4 py-2 rounded-xl text-white border-0 mt-6 cursor-pointer"
           type="submit"
           value="Submit"
         />
