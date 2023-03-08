@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import Zoom from "react-img-hover-zoom";
 import "./zoom.css";
+import ReactModal from "react-modal";
+import BookingModal from "../../BookingModal/BookingModal";
 
 const Keyboard = () => {
   const [keyboards, setKeyboards] = useState();
@@ -58,7 +60,7 @@ const Keyboard = () => {
       <h2 className=" text-3xl"> Keyboards </h2>
       <Slider {...card}>
         {keyboards?.map((keyboard) => (
-          <div key={keyboard._id} className="zoom  py-4 px-6">
+          <div key={keyboard?._id} className="zoom  py-4 px-6">
             <div data-aos="zoom-in" data-aos-duration="1000">
               <img src={keyboard.photo} className=" w-72" />
             </div>
@@ -68,6 +70,7 @@ const Keyboard = () => {
                 <p className=" text-2xl mr-4">{keyboard?.newPrice}</p>
                 <p className=" text-xl line-through">{keyboard?.oldPrice}</p>
               </div>
+              {/* {keyboard && <BookingModal keyboard={keyboard}></BookingModal>} */}
             </div>
           </div>
         ))}
