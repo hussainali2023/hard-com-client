@@ -59,8 +59,8 @@ const MyOrders = () => {
                         </button>
                       </Link>
                     )}
-                    {booking?.price && booking?.paid && (
-                      <span className="text-green-500 disabled">Paid</span>
+                    {booking?.newPrice && booking?.paid && (
+                      <span className=" text-green-500">Paid</span>
                     )}
                   </td>
                 </tr>
