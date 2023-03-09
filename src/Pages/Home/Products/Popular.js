@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const Popular = () => {
   const [products, setProducts] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/product/popular")
+    fetch("https://hard-com-server.vercel.app/product/popular")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);

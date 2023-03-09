@@ -40,6 +40,11 @@ const Modal = ({ isOpen, onClose, children, product }) => {
   } = useForm();
 
   const handleBooking = (data) => {
+    if (!user?.uid) {
+      alert("Please Login First to Confirm your booking");
+      navigate("/login");
+      return;
+    }
     const booking = {
       bookingDate: date,
       productName: product.name,
@@ -52,7 +57,7 @@ const Modal = ({ isOpen, onClose, children, product }) => {
       newPrice: product.newPrice,
     };
     // console.log(booking);
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://hard-com-server.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -73,6 +78,13 @@ const Modal = ({ isOpen, onClose, children, product }) => {
     // console.log(booking);
   };
   if (!isOpen) return null;
+
+  const handleVerify = () => {
+    if (!user?.uid) {
+      alert("Please Login First to Confirm your booking");
+      return;
+    }
+  };
 
   return (
     <>
@@ -205,6 +217,7 @@ const Modal = ({ isOpen, onClose, children, product }) => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             />
             <input
+              // onClick={handleVerify}
               className="btn bg-orange-400 py-2 rounded-xl cursor-pointer text-white border-0 mt-4"
               type="submit"
               value="Submit"

@@ -15,7 +15,7 @@ const MyProduct = () => {
     queryKey: ["products", user.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/all-products?email=${user.email}`
+        `https://hard-com-server.vercel.app/all-products?email=${user.email}`
       );
       const data = await res.json();
       return data;
@@ -27,7 +27,7 @@ const MyProduct = () => {
       `Are you want to sure to Delete ${product.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/all-products/${product._id}`, {
+      fetch(`https://hard-com-server.vercel.app/all-products/${product._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider";
 // import CategoryProduct from "../CategoryProduct/CategoryProduct";
 // import Keyboard from "../Products/Keyboard";
 import Popular from "../Products/Popular";
@@ -17,12 +18,15 @@ const OTHER_CONTENT_STYLES = {
 };
 
 const DetailsProduc = () => {
+  const { user } = useContext(AuthContext);
+
   const products = useLoaderData();
   const [open, setOpen] = useState(false);
   // const productObject = product[0];
   // const [CategoryProduct, setCategoryProdut] = useState("null");
   // const products = useLoaderData();
   console.log(products);
+
   return (
     <div
       style={BUTTON_WRAPPER_STYLES}

@@ -17,7 +17,7 @@ const AddProduct = () => {
   } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/category");
+      const res = await fetch("https://hard-com-server.vercel.app/category");
       const data = await res.json();
       return data;
     },
@@ -63,7 +63,7 @@ const AddProduct = () => {
             usage: data.usage,
           };
           // console.log(phone);
-          fetch("http://localhost:5000/all-products", {
+          fetch("https://hard-com-server.vercel.app/all-products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

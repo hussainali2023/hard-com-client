@@ -8,6 +8,7 @@ import AllBuyer from "../Pages/Dashboard/AllBuyer";
 import AllSeller from "../Pages/Dashboard/AllSeller";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import MyProduct from "../Pages/Dashboard/MyProduct";
+import Payment from "../Pages/Dashboard/Payment";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import CategoryProduct from "../Pages/Home/CategoryProduct/CategoryProduct";
 import DetailsProduc from "../Pages/Home/DetailsProduct/DetailsProduc";
@@ -47,18 +48,26 @@ const router = createBrowserRouter([
         path: "/category/:id",
         element: <CategoryProduct></CategoryProduct>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/type/${params.id}`),
+          fetch(
+            `https://hard-com-server.vercel.app/category/type/${params.id}`
+          ),
       },
 
       {
         path: "/product/:id",
         element: <DetailsProduc></DetailsProduc>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/product/${params.id}`),
+          fetch(`https://hard-com-server.vercel.app/product/${params.id}`),
       },
       {
         path: "/my-orders",
         element: <MyOrders></MyOrders>,
+      },
+      {
+        path: "/payment/:id",
+        element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/bookings/${params.id}`),
       },
       {
         path: "/my-product",

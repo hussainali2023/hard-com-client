@@ -15,7 +15,7 @@ const AddCategory = () => {
   } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/category");
+      const res = await fetch("https://hard-com-server.vercel.app/category");
       const data = await res.json();
       return data;
     },
@@ -49,7 +49,7 @@ const AddCategory = () => {
             logo: imgData.data.url,
           };
           // console.log(category);
-          fetch("http://localhost:5000/category", {
+          fetch("https://hard-com-server.vercel.app/category", {
             method: "POST",
             headers: {
               "content-type": "application/json",
